@@ -1,5 +1,5 @@
 package ve.edu.unet.nodosAST;
 
 public enum tipoVar {
-	integer,boolean
+	entero,booleano
 }

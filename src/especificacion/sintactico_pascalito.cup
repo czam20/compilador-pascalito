@@ -49,29 +49,48 @@ action code {:
 
 /* Simbolos Terminales */
 
-terminal IF;
-terminal THEN;
-terminal ELSE;
+terminal VAR;
+terminal BOOLEAN;
+terminal INTEGER;
+terminal ARRAY;
+terminal BEGIN;
 terminal END;
+terminal FOR;
 terminal REPEAT;
 terminal UNTIL;
 terminal READ;
 terminal WRITE;
-terminal String ID;
-terminal String NUM;
 terminal ASSIGN;
 terminal EQ;
+terminal NEQ;
 terminal LT;
+terminal LEQ;
+terminal GT;
+terminal GEQ;
 terminal PLUS;
 terminal MINUS;
 terminal TIMES;
 terminal OVER;
+terminal MOD;
+terminal COLON;
+terminal SEMI;
+terminal IF;
+terminal THEN;
+terminal ELSE;
 terminal LPAREN;
 terminal RPAREN;
-terminal SEMI;
+terminal AND;
+terminal OR;
+terminal NOT;
+
+terminal String ID;
+terminal String NUM;
 
 /* Simbolos No Terminales */
 non terminal program;
+non terminal NodoBase program_body;
+non terminal NodoBase decl_seq;
+non terminal NodoBase decl;
 non terminal NodoBase stmt_seq;
 non terminal NodoBase stmt;
 non terminal NodoBase if_stmt;
@@ -79,6 +98,7 @@ non terminal NodoBase repeat_stmt;
 non terminal NodoBase assign_stmt;
 non terminal NodoBase read_stmt;
 non terminal NodoBase write_stmt;
+non terminal NodoBase for_stmt;
 non terminal NodoBase exp;
 non terminal NodoBase simple_exp;
 non terminal NodoBase term;
@@ -88,18 +108,52 @@ non terminal NodoBase factor;
 precedence left PLUS;
 precedence left MINUS;
 precedence left TIMES;
-
+precedence left OVER;
+precedence left LT, LEQ, GT, GEQ, EQ, NEQ;
+precedence left AND, OR;
+precedence right NOT;
 
 /* REGLAS GRAMATICALES */
-program     ::= stmt_seq:s	{: if(debug) System.out.println("\t regla 1");
+program     ::=  program_body:s	{: if(debug) System.out.println("\t regla 1");
 					ast = s;
 					:}
 		;
 
+
+program_body ::= decl_seq BEGIN stmt_seq:sent END {: RESULT=sent; :};
+
+decl_seq ::= VAR
+                decl_seq:ini SEMI decl:sent  {: if(debug) System.out.println("\t regla decl_seq");
+                                    						NodoBase hijoActual = ini;
+                                    						if(hijoActual !=null){
+                                    							 while(hijoActual.TieneHermano()){
+                                    								hijoActual = hijoActual.getHermanoDerecha();
+                                    							}
+                                    							hijoActual.setHermanoDerecha(sent);
+                                    							RESULT=ini;
+                                    						}else{
+                                    							RESULT=sent;
+                                    						}
+                                    						:}
+
+
+                | decl:sent {: if(debug) System.out.println("\t regla 2 decl_seq");
+                       				RESULT=sent;
+                       				:};
+
+decl ::= ID:varbool COLON BOOLEAN  {: if(debug) System.out.println("\t regla decl2");
+                                   								RESULT = new NodoDeclaracion(varbool,tipoVar.booleano);
+                                   								:}
+ |  ID:varint COLON INTEGER SEMI {: if(debug) System.out.println("\t regla decl2");
+                             								RESULT = new NodoDeclaracion(varint,tipoVar.entero);
+                             								:}
+
+ ;
+
 stmt_seq    ::= stmt_seq:ini SEMI stmt:sent	{: if(debug) System.out.println("\t regla 2a");
 						NodoBase hijoActual = ini;
 						if(hijoActual !=null){
-							while(hijoActual.TieneHermano()){
+							 while(hijoActual.TieneHermano()){
 								hijoActual = hijoActual.getHermanoDerecha();
 							}
 							hijoActual.setHermanoDerecha(sent);
@@ -119,25 +173,28 @@ stmt        ::= if_stmt:sif	{: if(debug) System.out.println("\t regla 3a");
             | repeat_stmt:srep	{: if(debug) System.out.println("\t regla 3b");
 						RESULT=srep;
 						:}
-            | assign_stmt:sasi	{: if(debug) System.out.println("\t regla 3c");
+			| for_stmt:sfor	{: if(debug) System.out.println("\t regla 3c");
+                        	RESULT=sfor;
+                        :}
+            | assign_stmt:sasi	{: if(debug) System.out.println("\t regla 3d");
 						RESULT=sasi;
 						:}
-            | read_stmt:slec	{: if(debug) System.out.println("\t regla 3d");
+            | read_stmt:slec	{: if(debug) System.out.println("\t regla 3e");
 					RESULT=slec;
 					:}
-            | write_stmt:sesc	{: if(debug) System.out.println("\t regla 3e");
+            | write_stmt:sesc	{: if(debug) System.out.println("\t regla 3f");
 					RESULT=sesc;
 					:}
-            | error	{: if(debug) System.out.println("\t regla 3f");
+            | error	{: if(debug) System.out.println("\t regla 3g");
 				System.out.println("Ocurrio error en cup # 0004");
 				RESULT=null;
 				:}
             ;
 
-if_stmt     ::= IF exp:ex THEN stmt_seq:pthen END	{: if(debug) System.out.println("\t regla 4a");
+if_stmt     ::= IF exp:ex THEN stmt_seq:pthen 	{: if(debug) System.out.println("\t regla 4a");
 		RESULT = new NodoIf(ex,pthen);
 		:}
-		| IF exp:ex THEN stmt_seq:pthen ELSE stmt_seq:pelse END	{: if(debug) System.out.println("\t regla 4b");
+		| IF exp:ex THEN stmt_seq:pthen ELSE stmt_seq:pelse 	{: if(debug) System.out.println("\t regla 4b");
 		RESULT = new NodoIf(ex,pthen,pelse);
 		:}
 		;
@@ -151,7 +208,7 @@ assign_stmt ::= ID:variable 	{: if(debug) System.out.println("\t regla 6 parte d
 				/*lineanum=1000; //Pasar/Obtener la linea correcta por el Simbolo
 				String nombre = variable.getName();*/
 				:}
-			ASSIGN exp:ex	{: if(debug) System.out.println("\t regla 6 parte final");
+			ASSIGN exp:ex SEMI	{: if(debug) System.out.println("\t regla 6 parte final");
 					if(variable!=null)
 					RESULT = new NodoAsignacion(variable.toString(),ex);
 					else{
@@ -171,6 +228,7 @@ read_stmt   ::= READ ID:variable	{: if(debug) System.out.println("\t regla 7");
 					}
 					:}
 		;
+
 
 write_stmt  ::= WRITE exp:ex	{: if(debug) System.out.println("\t regla 8");
 					RESULT= new NodoEscribir(ex);

@@ -143,6 +143,17 @@ espacio		= [ \t]+
 			return sf.newSymbol("COLON",sym.COLON);
 			}
 
+"AND"             {	if(debug) System.out.println("token AND");
+			return sf.newSymbol("AND",sym.AND);
+			}
+
+"OR"             {	if(debug) System.out.println("token OR");
+			return sf.newSymbol("OR",sym.OR);
+			}
+
+"NOT"             {	if(debug) System.out.println("token NOT");
+			return sf.newSymbol("NOT",sym.NOT);
+
 "IF"            {	if(debug) System.out.println("token IF");
 			return sf.newSymbol("IF",sym.IF);
 			}
