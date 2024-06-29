@@ -142,7 +142,7 @@ public class Generador {
 	}
 
 	private static void generarDeclaracion(NodoBase nodo){
-		System.out.println("declaracion")
+		System.out.println("declaracion");
 		// NodoDeclaracion n = (NodoDeclaracion)nodo;
 		// int direccion;
 		// if(UtGen.debug)	UtGen.emitirComentario("-> declaracion");		
