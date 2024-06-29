@@ -17,6 +17,9 @@ public class Util {
 		    else if (raiz instanceof  NodoAsignacion)
 		    	System.out.println("Asignacion a: "+((NodoAsignacion)raiz).getIdentificador());
 
+		    else if (raiz instanceof  NodoDeclaracion)
+		    	System.out.println("Declaracion: "+((NodoDeclaracion)raiz).getIdentificador()+((NodoDeclaracion)raiz).getTipo());
+
 		    else if (raiz instanceof  NodoLeer)  
 		    	System.out.println("Lectura: "+((NodoLeer)raiz).getIdentificador());
 
@@ -91,8 +94,16 @@ static void imprimirNodo( NodoBase raiz )
 		tipoOp sel=((NodoOperacion) raiz).getOperacion();
 		if(sel==tipoOp.menor)
 			System.out.println("<"); 
+		if(sel==tipoOp.menorIgual)
+			System.out.println("<="); 
+		if(sel==tipoOp.mayor)
+			System.out.println(">"); 
+		if(sel==tipoOp.mayorIgual)
+			System.out.println(">="); 
 		if(sel==tipoOp.igual)
 			System.out.println("=");
+		if(sel==tipoOp.noIgual)
+			System.out.println("<>");
 		if(sel==tipoOp.mas)
 			System.out.println("+");
 		if(sel==tipoOp.menos)
@@ -101,6 +112,8 @@ static void imprimirNodo( NodoBase raiz )
 			System.out.println("*");
 		if(sel==tipoOp.entre)
 			System.out.println("/");
+		if(sel==tipoOp.mod)
+			System.out.println("mod");
 	}
 
 	if(	raiz instanceof NodoValor ){
@@ -109,6 +122,10 @@ static void imprimirNodo( NodoBase raiz )
 
 	if(	raiz instanceof NodoIdentificador ){
 		System.out.println("ID, nombre= "+ ((NodoIdentificador)raiz).getNombre());
+	}
+
+	if(	raiz instanceof NodoDeclaracion ){
+		System.out.println("VAR, identificador= "+ ((NodoDeclaracion)raiz).getIdentificador());
 	}
 
 }

@@ -73,6 +73,8 @@ public class Generador {
 			generarValor(nodo);
 		}else if (nodo instanceof NodoIdentificador){
 			generarIdentificador(nodo);
+		}else if (nodo instanceof NodoDeclaracion){
+			generarDeclaracion(nodo);
 		}else if (nodo instanceof NodoOperacion){
 			generarOperacion(nodo);
 		}else{
@@ -82,7 +84,7 @@ public class Generador {
 		if(nodo.TieneHermano())
 			generar(nodo.getHermanoDerecha());
 	}else
-		System.out.println("¡¡¡ERROR: por favor fije la tabla de simbolos a usar antes de generar codigo objeto!!!");
+		System.out.println("ï¿½ï¿½ï¿½ERROR: por favor fije la tabla de simbolos a usar antes de generar codigo objeto!!!");
 }
 
 	private static void generarIf(NodoBase nodo){
@@ -137,6 +139,17 @@ public class Generador {
 		direccion = tablaSimbolos.getDireccion(n.getIdentificador());
 		UtGen.emitirRM("ST", UtGen.AC, direccion, UtGen.GP, "asignacion: almaceno el valor para el id "+n.getIdentificador());
 		if(UtGen.debug)	UtGen.emitirComentario("<- asignacion");
+	}
+
+	private static void generarDeclaracion(NodoBase nodo){
+		System.out.println("declaracion")
+		// NodoDeclaracion n = (NodoDeclaracion)nodo;
+		// int direccion;
+		// if(UtGen.debug)	UtGen.emitirComentario("-> declaracion");		
+		// /* Ahora almaceno el valor resultante */
+		// direccion = tablaSimbolos.getDireccion(n.getIdentificador());
+		// UtGen.emitirRM("LD", UtGen.AC, direccion, UtGen.GP, "cargar valor de identificador: "+n.getIdentificador());
+		// if(UtGen.debug)	UtGen.emitirComentario("<- declaracion");
 	}
 	
 	private static void generarLeer(NodoBase nodo){
@@ -194,9 +207,31 @@ public class Generador {
 			case	por:	UtGen.emitirRO("MUL", UtGen.AC, UtGen.AC1, UtGen.AC, "op: *");
 							break;
 			case	entre:	UtGen.emitirRO("DIV", UtGen.AC, UtGen.AC1, UtGen.AC, "op: /");
+							break;
+			case 	mod:	UtGen.emitirRO("DIV", UtGen.AC+2, UtGen.AC1, UtGen.AC, "op: /");
+							UtGen.emitirRO("MUL", UtGen.AC+2, UtGen.AC+2, UtGen.AC1, "op: *");
+							UtGen.emitirRO("SUB", UtGen.AC, UtGen.AC, UtGen.AC+2, "op: - (se guarda el resultado del mod)");
 							break;		
 			case	menor:	UtGen.emitirRO("SUB", UtGen.AC, UtGen.AC1, UtGen.AC, "op: <");
 							UtGen.emitirRM("JLT", UtGen.AC, 2, UtGen.PC, "voy dos instrucciones mas alla if verdadero (AC<0)");
+							UtGen.emitirRM("LDC", UtGen.AC, 0, UtGen.AC, "caso de falso (AC=0)");
+							UtGen.emitirRM("LDA", UtGen.PC, 1, UtGen.PC, "Salto incodicional a direccion: PC+1 (es falso evito colocarlo verdadero)");
+							UtGen.emitirRM("LDC", UtGen.AC, 1, UtGen.AC, "caso de verdadero (AC=1)");
+							break;
+			case	menorIgual:	UtGen.emitirRO("SUB", UtGen.AC, UtGen.AC1, UtGen.AC, "op: <=");
+							UtGen.emitirRM("JLE", UtGen.AC, 2, UtGen.PC, "voy dos instrucciones mas alla if verdadero (AC<=0)");
+							UtGen.emitirRM("LDC", UtGen.AC, 0, UtGen.AC, "caso de falso (AC=0)");
+							UtGen.emitirRM("LDA", UtGen.PC, 1, UtGen.PC, "Salto incodicional a direccion: PC+1 (es falso evito colocarlo verdadero)");
+							UtGen.emitirRM("LDC", UtGen.AC, 1, UtGen.AC, "caso de verdadero (AC=1)");
+							break;
+			case	mayor:  UtGen.emitirRO("SUB", UtGen.AC, UtGen.AC1, UtGen.AC, "op: >");
+							UtGen.emitirRM("JGT", UtGen.AC, 2, UtGen.PC, "voy dos instrucciones mas alla if verdadero (AC>0)");
+							UtGen.emitirRM("LDC", UtGen.AC, 0, UtGen.AC, "caso de falso (AC=0)");
+							UtGen.emitirRM("LDA", UtGen.PC, 1, UtGen.PC, "Salto incodicional a direccion: PC+1 (es falso evito colocarlo verdadero)");
+							UtGen.emitirRM("LDC", UtGen.AC, 1, UtGen.AC, "caso de verdadero (AC=1)");
+							break;
+			case	mayorIgual:  UtGen.emitirRO("SUB", UtGen.AC, UtGen.AC1, UtGen.AC, "op: >=");
+							UtGen.emitirRM("JGE", UtGen.AC, 2, UtGen.PC, "voy dos instrucciones mas alla if verdadero (AC>0)");
 							UtGen.emitirRM("LDC", UtGen.AC, 0, UtGen.AC, "caso de falso (AC=0)");
 							UtGen.emitirRM("LDA", UtGen.PC, 1, UtGen.PC, "Salto incodicional a direccion: PC+1 (es falso evito colocarlo verdadero)");
 							UtGen.emitirRM("LDC", UtGen.AC, 1, UtGen.AC, "caso de verdadero (AC=1)");
@@ -206,7 +241,13 @@ public class Generador {
 							UtGen.emitirRM("LDC", UtGen.AC, 0, UtGen.AC, "caso de falso (AC=0)");
 							UtGen.emitirRM("LDA", UtGen.PC, 1, UtGen.PC, "Salto incodicional a direccion: PC+1 (es falso evito colocarlo verdadero)");
 							UtGen.emitirRM("LDC", UtGen.AC, 1, UtGen.AC, "caso de verdadero (AC=1)");
-							break;	
+							break;
+			case	noIgual:  UtGen.emitirRO("SUB", UtGen.AC, UtGen.AC1, UtGen.AC, "op: <>");
+							UtGen.emitirRM("JNE", UtGen.AC, 2, UtGen.PC, "voy dos instrucciones mas alla if verdadero (AC<>0)");
+							UtGen.emitirRM("LDC", UtGen.AC, 0, UtGen.AC, "caso de falso (AC=0)");
+							UtGen.emitirRM("LDA", UtGen.PC, 1, UtGen.PC, "Salto incodicional a direccion: PC+1 (es falso evito colocarlo verdadero)");
+							UtGen.emitirRM("LDC", UtGen.AC, 1, UtGen.AC, "caso de verdadero (AC=1)");
+							break;
 			default:
 							UtGen.emitirComentario("BUG: tipo de operacion desconocida");
 		}
