@@ -1,0 +1,192 @@
+package ve.edu.unet;
+
+import java_cup.runtime.*;
+import ve.edu.unet.nodosAST.*;
+import java.io.InputStreamReader;
+
+
+parser code {:
+
+/***********
+SymbolFactory es una nueva caracteristica que ha sido añadida a las version 11a de cup, la cual facilita la implementacion de clases Symbol personalizadas
+, esto debido a que dicha clase no provee mucha información de contexto que podria ser util para el analisis semantico o ayudar en la construccion del AST
+Mas informacion en: http//4thmouse.com/index.php/2007/02/15/using-custom-symbols-in-cup/
+***********/
+	public static void main(String args[]) throws Exception {
+		SymbolFactory sf = new DefaultSymbolFactory();
+		parser parser_obj;
+		if (args.length==0)
+			parser_obj=new parser(new Lexico(new InputStreamReader(System.in),sf),sf);
+		else
+			parser_obj=new parser(new Lexico(new InputStreamReader(new java.io.FileInputStream(args[0])),sf),sf);
+
+		parser_obj.parse();
+		NodoBase root=parser_obj.action_obj.getASTroot();
+		System.out.println();
+		System.out.println("IMPRESION DEL AST GENERADO");
+		System.out.println();
+        Util.imprimirAST(root);
+		TablaSimbolos ts = new TablaSimbolos();
+		ts.cargarTabla(root);
+		ts.ImprimirClaves();
+		Generador.setTablaSimbolos(ts);
+		Generador.generarCodigoObjeto(root);
+	}
+
+:}
+
+action code {:
+	private boolean debug=true;
+	private NodoBase ast=null;
+	private int lineanum=0;
+
+	//Debe ser llamada solo despues de un parse(), en caso contrario retornara null siempre;
+	public NodoBase getASTroot(){
+		return ast;
+	}
+
+:}
+
+
+/* Declaración de terminales */
+terminal PLUS, MINUS, TIMES, OVER, MOD;
+terminal LT, LE, GT, GE, EQ, NE;
+terminal AND, OR, NOT;
+terminal ASSIGN;
+terminal SEMICOLON, COMMA, LPAREN, RPAREN;
+terminal IF, THEN, ELSE, FOR, REPEAT, UNTIL;
+terminal BEGIN, END, VAR, INTEGER, BOOLEAN, COLON, TRUE, FALSE;
+terminal TO, DO;
+terminal Integer NUMBER;
+terminal String ID;
+
+/* Declaración de no terminales */
+
+non terminal program;
+non terminal program_body;
+non terminal block;
+non terminal var_declaration_list;
+non terminal var_declaration;
+non terminal var_list;
+non terminal type;
+non terminal statement_list;
+non terminal statement;
+non terminal expr;
+non terminal term;
+non terminal factor;
+non terminal condition;
+non terminal bool_expr;
+non terminal boolean_value;
+
+/* Precedencia de operadores */
+precedence left OR;
+precedence left AND;
+precedence left EQ, NE, LT, LE, GT, GE;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE, MOD;
+precedence left NOT;
+
+
+/* Reglas sintacticas */
+
+program ::= program_body;
+
+program_body ::= VAR var_declaration_list BEGIN statement_list END;
+
+var_declaration_list ::= var_declaration_list var_declaration
+                       | var_declaration
+                       ;
+
+var_declaration ::= var_list COLON type SEMICOLON;
+
+var_list ::= var_list COMMA ID
+           | ID
+           ;
+
+type ::= INTEGER
+       | BOOLEAN
+       ;
+
+statement_list ::= statement_list statement
+                 | statement
+                 ;
+
+statement ::= ID ASSIGN expr SEMICOLON
+            | ID ASSIGN boolean_value SEMICOLON
+            | IF bool_expr THEN statement_list
+            | IF bool_expr THEN statement_list ELSE statement_list
+            | FOR ID ASSIGN expr TO expr DO statement_list
+            | REPEAT statement_list UNTIL bool_expr SEMICOLON
+            ;
+
+expr ::= expr PLUS term
+       | expr MINUS term
+       | term
+       ;
+
+term ::= term TIMES factor
+       | term DIVIDE factor
+       | term MOD factor
+       | factor
+       ;
+
+factor ::= LPAREN expr RPAREN
+         | NUMBER
+         | ID
+         ;
+
+condition ::= expr LT expr
+            | expr LE expr
+            | expr GT expr
+            | expr GE expr
+            | expr EQ expr
+            | expr NE expr
+            ;
+
+bool_expr ::= bool_expr OR bool_expr
+            | bool_expr AND bool_expr
+            | NOT bool_expr
+            | condition
+            ;
+
+boolean_value ::= TRUE
+                | FALSE
+                ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
