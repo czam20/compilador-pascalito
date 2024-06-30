@@ -250,8 +250,6 @@ read_stm ::= READ ID:variable	{:
 		;
 
 write_stm ::= WRITE expr:ex	{:
-                    System.out.println(ex);
-                    System.out.println("escribir");
 					RESULT= new NodoEscribir(ex);
 					:}
 		;
@@ -285,8 +283,6 @@ factor ::= LPAREN expr:ex RPAREN {:
                                     RESULT = ex;
                                  :}
          | NUMBER:valor {:
-                            System.out.println(valor);
-                            System.out.println("valor");
                         	if(valor!=null){
                         		RESULT= new NodoValor(Integer.parseInt(valor));
                         	}else{

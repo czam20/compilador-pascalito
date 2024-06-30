@@ -4,20 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf9ae431-d20f-4afd-a1af-781fa2ad77cd" name="Changes" comment="add: sintactico">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tests/test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ve/edu/unet/Tipos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/NodoBool.java" afterDir="false" />
+    <list default="true" id="bf9ae431-d20f-4afd-a1af-781fa2ad77cd" name="Changes" comment="add: fix sintactico">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/especificacion/lexico_pascalito.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/especificacion/lexico_pascalito.flex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/especificacion/sintactico_pascalito.cup" beforeDir="false" afterPath="$PROJECT_DIR$/src/especificacion/sintactico_pascalito.cup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/test.tny" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/Generador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ve/edu/unet/Generador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/Lexico.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/parser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/sym.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ve/edu/unet/parser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +91,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1719716099337</updated>
-      <workItem from="1719716100515" duration="17033000" />
+      <workItem from="1719716100515" duration="17779000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -126,7 +117,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719725525044</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add: fix sintactico">
+      <option name="closed" value="true" />
+      <created>1719733506358</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1719733506358</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,7 +149,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="add: sintactico" />
-    <option name="LAST_COMMIT_MESSAGE" value="add: sintactico" />
+    <MESSAGE value="add: fix sintactico" />
+    <option name="LAST_COMMIT_MESSAGE" value="add: fix sintactico" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

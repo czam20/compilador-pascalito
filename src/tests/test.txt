@@ -1,14 +1,6 @@
 VAR
-        num: INTEGER;
-        numdos: INTEGER;
-
+  i: INTEGER;
 BEGIN
-    num:=1;
-    numdos:=2;
-
-    IF numdos<num THEN
-            WRITE num;
-    ELSE
-            IF numdos>num THEN
-                WRITE numdos;
+  FOR i := 1 TO 10 DO
+    WRITE(i);
 END
