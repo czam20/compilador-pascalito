@@ -71,22 +71,39 @@ public class Generador {
 			generarEscribir(nodo);
 		}else if (nodo instanceof NodoValor){
 			generarValor(nodo);
+		}else if (nodo instanceof NodoBool){
+			generarValor(nodo);
 		}else if (nodo instanceof NodoIdentificador){
 			generarIdentificador(nodo);
 		}else if (nodo instanceof NodoOperacion){
 			generarOperacion(nodo);
 		}else if(nodo instanceof  NodoPrograma){
-			generar(((NodoPrograma) nodo).getDeclSeq());
-			generar(((NodoPrograma) nodo).getStmtSeq());
-		} else{
+			generarPrograma(nodo);
+		}else if (nodo instanceof NodoFor){
+			generarFor(nodo);
+		}else{
 			System.out.println("BUG: Tipo de nodo a generar desconocido");
 		}
 		/*Si el hijo de extrema izquierda tiene hermano a la derecha lo genero tambien*/
-		if(nodo.TieneHermano())
+		if(nodo.TieneHermano()){
+			System.out.println("testing");
+			System.out.println(nodo.TieneHermano());
 			generar(nodo.getHermanoDerecha());
+		}
+
 	}else
 		System.out.println("���ERROR: por favor fije la tabla de simbolos a usar antes de generar codigo objeto!!!");
 }
+
+	private static void generarPrograma(NodoBase nodo){
+		NodoPrograma n = (NodoPrograma)nodo;
+		if (n.getDeclSeq() != null) {
+			generar(n.getDeclSeq());
+		}
+		if (n.getStmtSeq() != null) {
+			generar(n.getStmtSeq());
+		}
+	}
 
 	private static void generarIf(NodoBase nodo){
     	NodoIf n = (NodoIf)nodo;
@@ -215,7 +232,44 @@ public class Generador {
 		}
 		if(UtGen.debug)	UtGen.emitirComentario("<- Operacion: " + n.getOperacion());
 	}
-	
+
+	private static void generarFor(NodoBase nodo){
+		NodoFor n = (NodoFor)nodo;
+		int direccionVariable, localidadSaltoInicio, localidadSaltoFin;
+
+		if(UtGen.debug) UtGen.emitirComentario("-> for");
+
+		// Paso 1: Inicializar la variable del ciclo
+		generar(n.getValorInicial());
+		direccionVariable = tablaSimbolos.getDireccion(n.getNombreVariable());
+		UtGen.emitirRM("ST", UtGen.AC, direccionVariable, UtGen.GP, "for: inicializar " + n.getNombreVariable());
+
+		// Paso 2: Generar etiqueta de inicio del ciclo para saltos
+		localidadSaltoInicio = UtGen.emitirSalto(0);
+
+		// Paso 3: Comparar variable con el valor final
+		UtGen.emitirRM("LD", UtGen.AC, direccionVariable, UtGen.GP, "for: cargar valor de " + n.getNombreVariable());
+		generar(n.getValorFinal());
+		UtGen.emitirRO("SUB", UtGen.AC, UtGen.AC, UtGen.AC1, "for: comparar " + n.getNombreVariable() + " con su valor final");
+		localidadSaltoFin = UtGen.emitirSalto(1); // Preparar salto si la condición es falsa
+
+		// Paso 4: Generar el cuerpo del ciclo
+		generar(n.getCuerpo());
+
+		// Paso 5: Incrementar la variable del ciclo
+		UtGen.emitirRM("LDA", UtGen.AC1, 1, UtGen.AC, "for: incrementar valor de " + n.getNombreVariable());
+		UtGen.emitirRM("ST", UtGen.AC1, direccionVariable, UtGen.GP, "for: guardar valor incrementado de " + n.getNombreVariable());
+		UtGen.emitirRM_Abs("LDA", UtGen.PC, localidadSaltoInicio, "for: saltar al inicio del ciclo");
+
+		// Paso 6: Colocar la etiqueta de salida del ciclo
+		int localidadActual = UtGen.emitirSalto(0);
+		UtGen.cargarRespaldo(localidadSaltoFin);
+		UtGen.emitirRM_Abs("JEQ", UtGen.AC, localidadActual, "for: salir del ciclo si " + n.getNombreVariable() + " > valor final");
+		UtGen.restaurarRespaldo();
+
+		if(UtGen.debug) UtGen.emitirComentario("<- for");
+	}
+
 	//TODO: enviar preludio a archivo de salida, obtener antes su nombre
 	private static void generarPreludioEstandar(){
 		UtGen.emitirComentario("Compilacion TINY para el codigo objeto TM");

@@ -67,10 +67,6 @@ espacio		= [ \t]+
       			        return sf.newSymbol("INTEGER",sym.INTEGER);
       			}
 
-"ARRAY"        { if(debug) System.out.println("token ARRAY");
-                     			        return sf.newSymbol("ARRAY",sym.ARRAY);
-                     			}
-
 "BEGIN"         { if(debug) System.out.println("token BEGIN");
                                      			        return sf.newSymbol("BEGIN",sym.BEGIN);
                                      			}
@@ -189,8 +185,8 @@ espacio		= [ \t]+
 			return sf.newSymbol("RPAREN",sym.RPAREN);
 			}
 
-";"             {	if(debug) System.out.println("token SEMI");
-			return sf.newSymbol("SEMI",sym.SEMI);
+";"             {	if(debug) System.out.println("token SEMICOLON");
+			return sf.newSymbol("SEMICOLON",sym.SEMICOLON);
 			}
 
 ","             {	if(debug) System.out.println("token COMMA");
@@ -205,8 +201,8 @@ espacio		= [ \t]+
             			return sf.newSymbol("FALSE",sym.FALSE);
             			}
 
-{numero}        {	if(debug) System.out.println("token NUM");
-			return sf.newSymbol("NUM",sym.NUM,new String(yytext()));
+{numero}        {	if(debug) System.out.println("token NUMBER");
+			return sf.newSymbol("NUMBER",sym.NUMBER,new String(yytext()));
 			}
 
 {identificador}	{	if(debug) System.out.println("token ID");

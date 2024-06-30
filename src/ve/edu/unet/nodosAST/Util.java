@@ -20,11 +20,18 @@ public class Util {
 		    else if (raiz instanceof  NodoLeer)  
 		    	System.out.println("Lectura: "+((NodoLeer)raiz).getIdentificador());
 
-		    else if (raiz instanceof  NodoEscribir)
-		    	System.out.println("Escribir");
-		    
+			else if (raiz instanceof  NodoEscribir)
+				System.out.println("Escribir");
+
+			else if (raiz instanceof  NodoFor)
+				System.out.println("For");
+
+			else if (raiz instanceof  NodoPrograma)
+				System.out.println("Programa");
+
 		    else if (raiz instanceof NodoOperacion
 		    		|| raiz instanceof NodoValor
+					|| raiz instanceof NodoBool
 		    		|| raiz instanceof NodoIdentificador )
 		    	imprimirNodo(raiz);
 		    else System.out.println("Tipo de nodo desconocido");;

@@ -4,15 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf9ae431-d20f-4afd-a1af-781fa2ad77cd" name="Changes" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/NodoFor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/NodoPrograma.java" afterDir="false" />
+    <list default="true" id="bf9ae431-d20f-4afd-a1af-781fa2ad77cd" name="Changes" comment="add: sintactico">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/test.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ve/edu/unet/Tipos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/NodoBool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/especificacion/lexico_pascalito.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/especificacion/lexico_pascalito.flex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/especificacion/sintactico_pascalito.cup" beforeDir="false" afterPath="$PROJECT_DIR$/src/especificacion/sintactico_pascalito.cup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/test.tny" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/Generador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ve/edu/unet/Generador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/Lexico.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/TablaSimbolos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ve/edu/unet/TablaSimbolos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/tipoOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/tipoOp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/Util.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/parser.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/sym.java" beforeDir="false" />
     </list>
@@ -24,12 +27,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 8
@@ -44,6 +51,7 @@
   "keyToString": {
     "Application.Pascalito.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Brany/IdeaProjects/compiladores2024_2/src/especificacion/jflex-full-1.8.2.jar",
@@ -70,7 +78,7 @@
     <configuration name="Pascalito" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ve.edu.unet.parser" />
       <module name="compiladores2024_2" />
-      <option name="PROGRAM_PARAMETERS" value="C:\Users\Brany\IdeaProjects\compiladores2024_2\src\tests\test.tny" />
+      <option name="PROGRAM_PARAMETERS" value="C:\Users\Brany\IdeaProjects\compiladores2024_2\src\tests\test.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -92,7 +100,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1719716099337</updated>
-      <workItem from="1719716100515" duration="8670000" />
+      <workItem from="1719716100515" duration="17033000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -110,7 +118,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719719040709</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add: sintactico">
+      <option name="closed" value="true" />
+      <created>1719725525044</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1719725525044</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,7 +149,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="add: sintactico" />
+    <option name="LAST_COMMIT_MESSAGE" value="add: sintactico" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -143,7 +160,17 @@
           <line>11</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ve/edu/unet/Generador.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="ve.edu.unet.TablaSimbolos" memberName="tabla" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
