@@ -1,0 +1,13 @@
+VAR
+  i: INTEGER;
+  j: INTEGER;
+BEGIN
+  j:=3;
+
+  FOR i:=1 TO 5 DO
+    IF j<i THEN
+        WRITE(i);
+    ELSE
+        WRITE(j);
+    ;
+END

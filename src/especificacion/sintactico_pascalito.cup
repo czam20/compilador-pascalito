@@ -252,6 +252,9 @@ read_stm ::= READ ID:variable	{:
 write_stm ::= WRITE expr:ex	{:
 					RESULT= new NodoEscribir(ex);
 					:}
+			    | WRITE condition:ex	{:
+                  					RESULT= new NodoEscribir(ex);
+                  					:}
 		;
 
 expr ::= expr:exI PLUS term:exD {:

@@ -1,0 +1,12 @@
+VAR
+  i: INTEGER;
+  j: INTEGER;
+BEGIN
+  i:=20;
+  j:=30;
+    IF j<i THEN
+        WRITE(i);
+    ELSE
+        IF j>i THEN
+            WRITE(j);
+END

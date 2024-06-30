@@ -4,11 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf9ae431-d20f-4afd-a1af-781fa2ad77cd" name="Changes" comment="add: fix sintactico">
+    <list default="true" id="bf9ae431-d20f-4afd-a1af-781fa2ad77cd" name="Changes" comment="fix mod operation">
+      <change afterPath="$PROJECT_DIR$/src/tests/forIf.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/forTest.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/if.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/opAritmeticas.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/opBool.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/especificacion/sintactico_pascalito.cup" beforeDir="false" afterPath="$PROJECT_DIR$/src/especificacion/sintactico_pascalito.cup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/test.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/Generador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ve/edu/unet/Generador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ve/edu/unet/parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/parser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/sym.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,41 +31,58 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Branyer"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/czam20/compilador-pascalito.git",
+    "accountId": "dce47905-71e7-4191-a815-88bf446194f0"
+  }
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2ia5xhACKI64DmUnYJVZq8JQnJc" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Pascalito.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Brany/IdeaProjects/compiladores2024_2/src/especificacion/jflex-full-1.8.2.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/Brany/IdeaProjects/compiladores2024_2/src/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.fileTypes",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Pascalito.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Brany/IdeaProjects/compiladores2024_2/src/especificacion/jflex-full-1.8.2.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Brany/IdeaProjects/compiladores2024_2/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Brany\IdeaProjects\compiladores2024_2\src\especificacion" />
@@ -91,7 +115,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1719716099337</updated>
-      <workItem from="1719716100515" duration="17779000" />
+      <workItem from="1719716100515" duration="23748000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -125,7 +149,23 @@
       <option name="project" value="LOCAL" />
       <updated>1719733506358</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add: operation and generarFor">
+      <option name="closed" value="true" />
+      <created>1719734270613</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1719734270613</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix mod operation">
+      <option name="closed" value="true" />
+      <created>1719750611637</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1719750611637</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,7 +180,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -150,7 +202,9 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="add: sintactico" />
     <MESSAGE value="add: fix sintactico" />
-    <option name="LAST_COMMIT_MESSAGE" value="add: fix sintactico" />
+    <MESSAGE value="add: operation and generarFor" />
+    <MESSAGE value="fix mod operation" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix mod operation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -159,11 +213,6 @@
           <url>file://$PROJECT_DIR$/src/Main.java</url>
           <line>11</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ve/edu/unet/Generador.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
