@@ -209,8 +209,8 @@ public class Generador {
 			case	entre:	UtGen.emitirRO("DIV", UtGen.AC, UtGen.AC1, UtGen.AC, "op: /");
 							break;
 			case 	mod:	UtGen.emitirRO("DIV", UtGen.AC+2, UtGen.AC1, UtGen.AC, "op: /");
-							UtGen.emitirRO("MUL", UtGen.AC+2, UtGen.AC+2, UtGen.AC1, "op: *");
-							UtGen.emitirRO("SUB", UtGen.AC, UtGen.AC, UtGen.AC+2, "op: - (se guarda el resultado del mod)");
+							UtGen.emitirRO("MUL", UtGen.AC+2, UtGen.AC+2, UtGen.AC, "op: *");
+							UtGen.emitirRO("SUB", UtGen.AC, UtGen.AC+2, UtGen.AC1, "op: - (se guarda el resultado del mod)");
 							break;		
 			case	menor:	UtGen.emitirRO("SUB", UtGen.AC, UtGen.AC1, UtGen.AC, "op: <");
 							UtGen.emitirRM("JLT", UtGen.AC, 2, UtGen.PC, "voy dos instrucciones mas alla if verdadero (AC<0)");
