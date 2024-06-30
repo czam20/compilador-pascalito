@@ -57,6 +57,7 @@ terminal SEMICOLON, COMMA, LPAREN, RPAREN;
 terminal IF, THEN, ELSE, FOR, REPEAT, UNTIL;
 terminal BEGIN, END, VAR, INTEGER, BOOLEAN, COLON, TRUE, FALSE;
 terminal TO, DO;
+terminal READ, WRITE;
 terminal Integer NUMBER;
 terminal String ID;
 
@@ -64,13 +65,18 @@ terminal String ID;
 
 non terminal program;
 non terminal program_body;
-non terminal block;
 non terminal var_declaration_list;
 non terminal var_declaration;
 non terminal var_list;
 non terminal type;
 non terminal statement_list;
 non terminal statement;
+non terminal assign_stm;
+non terminal if_stm;
+non terminal for_stm;
+non terminal repeat_stm;
+non terminal read_stm;
+non terminal write_stm;
 non terminal expr;
 non terminal term;
 non terminal factor;
@@ -83,74 +89,252 @@ precedence left OR;
 precedence left AND;
 precedence left EQ, NE, LT, LE, GT, GE;
 precedence left PLUS, MINUS;
-precedence left TIMES, DIVIDE, MOD;
+precedence left TIMES, OVER, MOD;
 precedence left NOT;
 
 
 /* Reglas sintacticas */
 
-program ::= program_body;
+program ::= program_body:raiz {:
+            ast = raiz;
+        :};
 
-program_body ::= VAR var_declaration_list BEGIN statement_list END;
+program_body ::= VAR var_declaration_list:decl BEGIN statement_list:stm END {:
+                RESULT = new NodoPrograma(decl, stm);
+            :}
+            | BEGIN statement_list:stm END {:
+                RESULT = new NodoPrograma(stm);
+            :}
+;
 
-var_declaration_list ::= var_declaration_list var_declaration
-                       | var_declaration
+
+var_declaration_list ::= var_declaration_list:ini var_declaration:sent  {:
+                                                                                                NodoBase hijoActual = ini;
+                                                                        						if(hijoActual !=null){
+                                                                        							while(hijoActual.TieneHermano()){
+                                                                        								hijoActual = hijoActual.getHermanoDerecha();
+                                                                        							}
+                                                                        							hijoActual.setHermanoDerecha(sent);
+                                                                        							RESULT=ini;
+                                                                        						}else{
+                                                                        							RESULT=sent;
+                                                                        						}
+                                                                                         :}
+
+                       | var_declaration:sent  {:
+                                                                   RESULT=sent;
+                                                                :}
                        ;
 
-var_declaration ::= var_list COLON type SEMICOLON;
+var_declaration ::= var_list:list COLON type:tipo SEMICOLON  {:
 
-var_list ::= var_list COMMA ID
-           | ID
+    RESULT = list;
+:}
+
+;
+
+var_list ::= var_list:ini COMMA ID:variable {:
+                                                                    NodoBase hijoActual = ini;
+                                            						if(hijoActual !=null){
+                                            							while(hijoActual.TieneHermano()){
+                                            								hijoActual = hijoActual.getHermanoDerecha();
+                                            							}
+                                            							hijoActual.setHermanoDerecha(new NodoIdentificador(variable.toString()));
+                                            							RESULT=ini;
+                                            						}else{
+                                            							RESULT=variable;
+                                            						}
+                                                             :}
+           | ID:variable {:
+                                    		if(variable!=null){
+                                    			System.out.println("Construyendo Nodo ID para Lexema: "+ variable.toString());
+                                    			RESULT= new NodoIdentificador(variable.toString());
+                                    		}else{
+                                    			RESULT = null;
+                                    			System.out.println("Ocurrio error en factor id");
+                                    		}
+                                    	:}
            ;
 
-type ::= INTEGER
-       | BOOLEAN
+type ::= INTEGER {: RESULT= new String("INTEGER") :}
+       | BOOLEAN {: RESULT= new String("BOOLEAN") :}
        ;
 
-statement_list ::= statement_list statement
-                 | statement
+statement_list ::= statement_list:ini statement:sent  {:
+                        NodoBase hijoActual = ini;
+						if(hijoActual !=null){
+							while(hijoActual.TieneHermano()){
+								hijoActual = hijoActual.getHermanoDerecha();
+							}
+							hijoActual.setHermanoDerecha(sent);
+							RESULT=ini;
+						}else{
+							RESULT=sent;
+						}
+                 :}
+                 | statement:sent {:
+                    RESULT=sent;
+                 :}
                  ;
 
-statement ::= ID ASSIGN expr SEMICOLON
-            | ID ASSIGN boolean_value SEMICOLON
-            | IF bool_expr THEN statement_list
-            | IF bool_expr THEN statement_list ELSE statement_list
-            | FOR ID ASSIGN expr TO expr DO statement_list
-            | REPEAT statement_list UNTIL bool_expr SEMICOLON
+statement ::= assign_stm:sasi {:
+                                RESULT=sasi;
+                              :}
+            | if_stm:sif {:
+                            RESULT=sif;
+                         :}
+            | for_stm:sfor {:
+                            RESULT=sfor;
+                           :}
+            | repeat_stm:srep  {:
+                                RESULT=srep;
+                            :}
+            | read_stm:sread {:
+                                RESULT=sread;
+                              :}
+            | write_stm:swri {:
+                                RESULT=swri;
+                              :}
+            | error	{:
+				System.out.println("Ocurrio error en cup # 0004");
+				RESULT=null;
+				:}
             ;
 
-expr ::= expr PLUS term
-       | expr MINUS term
+assign_stm ::= ID:variable ASSIGN expr:ex SEMICOLON {:
+                                    if(variable!=null)
+                                        RESULT = new NodoAsignacion(variable.toString(),ex);
+                                    else{
+                                        RESULT = null;
+                                        System.out.println("Ocurrio error en assign");
+                                    }
+                                    :}
+            | ID:variable ASSIGN boolean_value:ex SEMICOLON {:
+                                    if(variable!=null)
+                                        RESULT = new NodoAsignacion(variable.toString(),ex);
+                                    else{
+                                        RESULT = null;
+                                        System.out.println("Ocurrio error en assign");
+                                    }
+                                    :}
+            ;
+
+if_stm ::= IF bool_expr:ex THEN statement_list:pthen SEMICOLON  {:
+                                                       		RESULT = new NodoIf(ex,pthen);
+                                                        :}
+        | IF bool_expr:ex THEN statement_list:pthen ELSE statement_list:pelse SEMICOLON {:
+                                                                              		RESULT = new NodoIf(ex,pthen,pelse);
+                                                                              	:}
+        ;
+
+for_stm ::= FOR ID:variable ASSIGN expr:inicial TO expr:final DO statement_list:cuerpo SEMICOLON {:
+                                                                                    RESULT = new NodoFor(variable.toString(),inicial,final,cuerpo);
+                                                                               :}
+        ;
+
+repeat_stm ::= REPEAT statement_list:body UNTIL bool_expr:ex SEMICOLON 	{:
+                                                               		RESULT = new NodoRepeat(body,ex);
+                                                               	:}
+        ;
+
+read_stm ::= READ ID:variable	{:
+					if(variable!=null)
+					RESULT = new NodoLeer(variable.toString());
+					else{
+					RESULT = null;
+					System.out.println("Ocurrio error en cup read");
+					}
+					:}
+		;
+
+write_stm ::= WRITE expr:ex	{:
+					RESULT= new NodoEscribir(ex);
+					:}
+		;
+
+expr ::= expr:exI PLUS term:exD {:
+                        		RESULT = new NodoOperacion(exI,tipoOp.mas,exD);
+                        	    :}
+       | expr:exI MINUS term:exD  {:
+                                    RESULT = new NodoOperacion(exI,tipoOp.menos,exD);
+                                   :}
        | term
        ;
 
-term ::= term TIMES factor
-       | term DIVIDE factor
-       | term MOD factor
+term ::= term:exI TIMES factor:exD {:
+                                     RESULT = new NodoOperacion(exI,tipoOp.por,exD);
+                                    :}
+       | term:exI OVER factor:exD {:
+                                      RESULT = new NodoOperacion(exI,tipoOp.entre,exD);
+                                     :}
+       | term:exI MOD factor:exD {:
+                                      RESULT = new NodoOperacion(exI,tipoOp.mod,exD);
+                                  :}
        | factor
        ;
 
-factor ::= LPAREN expr RPAREN
-         | NUMBER
-         | ID
+factor ::= LPAREN expr:ex RPAREN {:
+                                    RESULT = ex;
+                                 :}
+         | NUMBER:valor {:
+                        	if(valor!=null){
+                        		RESULT= new NodoValor(Integer.parseInt(valor));
+                        	}else{
+                        		RESULT = null;
+                        		System.out.println("Ocurrio error en factor number");
+                        	}
+                        :}
+         | ID:variable {:
+                       		if(variable!=null){
+                       			System.out.println("Construyendo Nodo ID para Lexema: "+ variable.toString());
+                       			RESULT= new NodoIdentificador(variable.toString());
+                       		}else{
+                       			RESULT = null;
+                       			System.out.println("Ocurrio error en factor id");
+                       		}
+                       	:}
+         | error {:
+                    System.out.println("Ocurrio error en factor");
+                    RESULT=null;
+                  :}
          ;
 
-condition ::= expr LT expr
-            | expr LE expr
-            | expr GT expr
-            | expr GE expr
-            | expr EQ expr
-            | expr NE expr
+condition ::= expr:exI LT expr:exD {:
+                                      RESULT = new NodoOperacion(exI,tipoOp.menor,exD);
+                                    :}
+            | expr:exI LE expr:exD {:
+                                      RESULT = new NodoOperacion(exI,tipoOp.menorIgual,exD);
+                                    :}
+            | expr:exI GT expr:exD {:
+                                     RESULT = new NodoOperacion(exI,tipoOp.mayor,exD);
+                                    :}
+            | expr:exI GE expr:exD {:
+                                     RESULT = new NodoOperacion(exI,tipoOp.mayorIgual,exD);
+                                    :}
+            | expr:exI EQ expr:exD {:
+                                      RESULT = new NodoOperacion(exI,tipoOp.igual,exD);
+                                    :}
+            | expr:exI NE expr:exD {:
+                                      RESULT = new NodoOperacion(exI,tipoOp.noIgual,exD);
+                                    :}
             ;
 
-bool_expr ::= bool_expr OR bool_expr
-            | bool_expr AND bool_expr
-            | NOT bool_expr
-            | condition
+bool_expr ::= bool_expr:exI OR bool_expr:exD {:
+                                         RESULT = new NodoOperacion(exI,tipoOp.o,exD);
+                                      :}
+            | bool_expr:exI AND bool_expr:exD {:
+                                         RESULT = new NodoOperacion(exI,tipoOp.y,exD);
+                                       :}
+            | NOT bool_expr:ex {:
+                                  RESULT = new NodoOperacion(null,tipoOp.negacion,ex);
+                                :}
+            | condition:cond {:
+                           RESULT = cond;
+                         :}
             ;
 
-boolean_value ::= TRUE
-                | FALSE
+boolean_value ::= TRUE {: RESULT= new String("T") :}
+                | FALSE {: RESULT= new String("F") :}
                 ;
 
 

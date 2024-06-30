@@ -8,51 +8,89 @@ package ve.edu.unet;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int TIMES = 17;
-  public static final int READ = 8;
-  public static final int OVER = 18;
-  public static final int LT = 14;
-  public static final int ELSE = 4;
-  public static final int PLUS = 15;
-  public static final int RPAREN = 20;
-  public static final int THEN = 3;
-  public static final int SEMI = 21;
-  public static final int END = 5;
-  public static final int IF = 2;
+  public static final int OVER = 5;
+  public static final int GE = 10;
+  public static final int INTEGER = 30;
   public static final int LPAREN = 19;
-  public static final int WRITE = 9;
-  public static final int ID = 10;
-  public static final int NUM = 11;
+  public static final int REPEAT = 25;
+  public static final int FOR = 24;
+  public static final int MINUS = 3;
+  public static final int WRITE = 38;
+  public static final int RPAREN = 20;
+  public static final int NOT = 15;
+  public static final int SEMICOLON = 17;
+  public static final int AND = 13;
+  public static final int LT = 7;
+  public static final int OR = 14;
+  public static final int COMMA = 18;
+  public static final int BEGIN = 27;
+  public static final int UNTIL = 26;
+  public static final int PLUS = 2;
+  public static final int ASSIGN = 16;
+  public static final int IF = 21;
+  public static final int ID = 40;
+  public static final int LE = 8;
   public static final int EOF = 0;
-  public static final int MINUS = 16;
+  public static final int BOOLEAN = 31;
+  public static final int TRUE = 33;
   public static final int error = 1;
-  public static final int UNTIL = 7;
-  public static final int ASSIGN = 12;
-  public static final int EQ = 13;
-  public static final int REPEAT = 6;
+  public static final int NUMBER = 39;
+  public static final int MOD = 6;
+  public static final int EQ = 11;
+  public static final int TIMES = 4;
+  public static final int COLON = 32;
+  public static final int ELSE = 23;
+  public static final int READ = 37;
+  public static final int TO = 35;
+  public static final int THEN = 22;
+  public static final int NE = 12;
+  public static final int END = 28;
+  public static final int FALSE = 34;
+  public static final int GT = 9;
+  public static final int VAR = 29;
+  public static final int DO = 36;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
-  "IF",
-  "THEN",
-  "ELSE",
-  "END",
-  "REPEAT",
-  "UNTIL",
-  "READ",
-  "WRITE",
-  "ID",
-  "NUM",
-  "ASSIGN",
-  "EQ",
-  "LT",
   "PLUS",
   "MINUS",
   "TIMES",
   "OVER",
+  "MOD",
+  "LT",
+  "LE",
+  "GT",
+  "GE",
+  "EQ",
+  "NE",
+  "AND",
+  "OR",
+  "NOT",
+  "ASSIGN",
+  "SEMICOLON",
+  "COMMA",
   "LPAREN",
   "RPAREN",
-  "SEMI"
+  "IF",
+  "THEN",
+  "ELSE",
+  "FOR",
+  "REPEAT",
+  "UNTIL",
+  "BEGIN",
+  "END",
+  "VAR",
+  "INTEGER",
+  "BOOLEAN",
+  "COLON",
+  "TRUE",
+  "FALSE",
+  "TO",
+  "DO",
+  "READ",
+  "WRITE",
+  "NUMBER",
+  "ID"
   };
 }
 

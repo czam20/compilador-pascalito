@@ -21,7 +21,7 @@ public class TablaSimbolos {
 		while (raiz != null) {
 	    if (raiz instanceof NodoIdentificador){
 	    	InsertarSimbolo(((NodoIdentificador)raiz).getNombre(),-1);
-	    	//TODO: Añadir el numero de linea y localidad de memoria correcta
+	    	//TODO: Aï¿½adir el numero de linea y localidad de memoria correcta
 	    }
 
 	    /* Hago el recorrido recursivo */
@@ -43,7 +43,10 @@ public class TablaSimbolos {
 	    else if (raiz instanceof NodoOperacion){
 	    	cargarTabla(((NodoOperacion)raiz).getOpIzquierdo());
 	    	cargarTabla(((NodoOperacion)raiz).getOpDerecho());
-	    }
+	    }else if (raiz instanceof  NodoPrograma) {
+			cargarTabla(((NodoPrograma)raiz).getDeclSeq());
+			cargarTabla(((NodoPrograma)raiz).getStmtSeq());
+		}
 	    raiz = raiz.getHermanoDerecha();
 	  }
 	}

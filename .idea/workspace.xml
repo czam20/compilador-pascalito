@@ -4,25 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf9ae431-d20f-4afd-a1af-781fa2ad77cd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/compiladores2024_2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/especificacion/java-cup-11b-runtime.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/especificacion/java-cup-11b.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/especificacion/jflex-full-1.8.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/especificacion/lexico_pascalito.flex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/especificacion/sintactico_pascalito.cup" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tests/test.tny" afterDir="false" />
+    <list default="true" id="bf9ae431-d20f-4afd-a1af-781fa2ad77cd" name="Changes" comment="initial commit">
+      <change afterPath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/NodoFor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/NodoPrograma.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/especificacion/sintactico_pascalito.cup" beforeDir="false" afterPath="$PROJECT_DIR$/src/especificacion/sintactico_pascalito.cup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/Generador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ve/edu/unet/Generador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/Lexico.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/TablaSimbolos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ve/edu/unet/TablaSimbolos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/tipoOp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ve/edu/unet/nodosAST/tipoOp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/parser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ve/edu/unet/sym.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,8 +92,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1719716099337</updated>
-      <workItem from="1719716100515" duration="2763000" />
+      <workItem from="1719716100515" duration="8670000" />
     </task>
+    <task id="LOCAL-00001" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1719719028376</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1719719028376</updated>
+    </task>
+    <task id="LOCAL-00002" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1719719040709</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1719719040709</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -98,6 +119,21 @@
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.flex" />
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.cup" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
